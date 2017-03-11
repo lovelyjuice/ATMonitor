@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ATMonitor</string>
+    <string name="login_title">用户登录</string>
+    <string name="hint_passwd">密码</string>
+    <string name="login_text">登录</string>
+    <string name="hint_username">用户名</string>
+</resources>
