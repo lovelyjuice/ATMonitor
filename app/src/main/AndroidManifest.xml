@@ -34,14 +34,20 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
         <activity android:name=".ChangePasswdActivity">
+        </activity>
+
+        <receiver
+            android:name=".ForceOfflineReciever"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.example.wenqh.atmonitor.FORCE_OFFLINE"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".CredentialActivity"
+            android:label="凭据">
+
         </activity>
     </application>
 

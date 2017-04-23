@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:baselineAligned="false">
+              android:baselineAligned="false"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="bottom"
+            android:text="尊敬的"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:id="@+id/username_text"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="bottom"
+            android:text="sdfsf"
+            android:textColor="@color/mycolor"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="bottom"
+            android:text="，您的余额为:"
+            android:textSize="18dp"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/balance_text"
@@ -12,10 +42,10 @@
         android:gravity="center"
         android:maxLines="1"
         android:text="500.00"
-        android:textIsSelectable="true"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
+        android:textIsSelectable="true"
         android:textSize="50sp"
         />
 
@@ -32,20 +62,21 @@
             android:gravity="center"
             android:hint="纸币数量"
             android:inputType="number"
+            android:maxLength="5"
             android:maxLines="1"
             android:maxWidth="100dp"
-            android:maxLength="5"
-            android:textSize="23sp"/>
+            android:textSize="18dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/piece"
+            android:layout_toEndOf="@id/piece"
             android:gravity="center"
             android:text="×100"
             android:textColor="@android:color/black"
-            android:textSize="20sp"/>
+            android:textSize="18dp"
+            tools:ignore="RtlHardcoded"/>
 
 
     </RelativeLayout>
@@ -74,6 +105,7 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:text="取款"
+            android:textAllCaps="false"
             android:textSize="18sp"/>
     </LinearLayout>
 
