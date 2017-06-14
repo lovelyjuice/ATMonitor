@@ -2,6 +2,7 @@ package com.example.wenqh.atmonitor;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import static com.example.wenqh.atmonitor.MainActivity.currentUser;
 
 public class ChangePasswdActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -45,23 +48,22 @@ public class ChangePasswdActivity extends AppCompatActivity implements View.OnCl
         String oldPasswd = old.getText().toString();
         String newPasswd = new_.getText().toString();
         String confirmPasswd = confirm.getText().toString();
-        if (oldPasswd.equals("") || newPasswd.equals("") || confirmPasswd.equals(""))
-        { Toast.makeText(this, "请确认是否有未输入的数据！", Toast.LENGTH_SHORT).show(); }
-        else
-        {
-            String realPasswd = "123456";     //123456替换为数据库中获取的密码
-            switch (v.getId())
-            {
+        if (oldPasswd.equals("") || newPasswd.equals("") || confirmPasswd.equals("")) {
+            Toast.makeText(this, "请确认是否有未输入的数据！", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            String realPasswd;
+            Cursor cursor = LoginActivity.db.rawQuery("select passwd from UserInfo where name=?", new String[]{currentUser});
+            cursor.moveToFirst();
+            realPasswd = cursor.getString(cursor.getColumnIndex("passwd"));
+            switch (v.getId()) {
                 case R.id.change_passwd_button:
-                    if (!newPasswd.equals(confirmPasswd))
-                    {
+                    if (!newPasswd.equals(confirmPasswd)) {
                         Toast.makeText(ChangePasswdActivity.this, "两次密码不一致", Toast.LENGTH_SHORT).show();
                     }
-                    else if (!oldPasswd.equals(realPasswd))
-                    {
+                    else if (!oldPasswd.equals(realPasswd)) {
                         times++;
-                        if (times >= 3)
-                        {
+                        if (times >= 3) {
                             AlertDialog.Builder dialog = new AlertDialog.Builder(ChangePasswdActivity.this);
                             dialog.setTitle("⚠️️警告");
                             dialog.setMessage("连续3次密码错误，即将退出登录！");
@@ -78,8 +80,7 @@ public class ChangePasswdActivity extends AppCompatActivity implements View.OnCl
                             });
                             dialog.show();
                         }
-                        else
-                        {
+                        else {
                             Log.d("times", String.valueOf(times));
                             AlertDialog.Builder dialog = new AlertDialog.Builder(ChangePasswdActivity.this);
                             dialog.setTitle("提示");
@@ -93,12 +94,11 @@ public class ChangePasswdActivity extends AppCompatActivity implements View.OnCl
                             dialog.show();
                         }
                     }
-                    else
-                    {
+                    else {
                     /*
                     更改密码
                      */
-                        LoginActivity.db.execSQL("update UserInfo set passwd=? where name=?", new String[]{newPasswd, MainActivity.currentUser});
+                        LoginActivity.db.execSQL("update UserInfo set passwd=? where name=?", new String[]{newPasswd, currentUser});
                         times = 0;
                         AlertDialog.Builder dialog = new AlertDialog.Builder(ChangePasswdActivity.this);
                         dialog.setTitle("提示");

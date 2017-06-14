@@ -66,8 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (!nameChk.isChecked() && passwdChk.isChecked())passwdChk.setChecked(false);
             }
         });
-        dbHelper=new MyDatabaseHelper(this,"user.db",null,1);
-        db=dbHelper.getWritableDatabase();
+        dbHelper=new MyDatabaseHelper(this,"user.db",null,1);                   //创建Helper实例
+        db=dbHelper.getWritableDatabase();                              //不存在则建立数据库，存在则打开数据库
     }
 
     @Override
